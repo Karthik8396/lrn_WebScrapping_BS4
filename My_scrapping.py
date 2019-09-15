@@ -15,7 +15,7 @@ http = urllib3.PoolManager()                #http connection pool
 req = http.request('GET','https://old.reddit.com/r/wallpapers/',headers = { 'User-Agent' : 'Mozilla/5.0' }) #setting the header to make the site think the request came from the browser
 
 sauce=req.data.decode('utf-8')      # decoding the response in utf=8 format
-req.close()                         #request close
+req.release_conn()                         #request close
 soup=bs.BeautifulSoup(sauce,'lxml')     #parsing the response
 divs=soup.find_all('div',class_='content')
 images=[]

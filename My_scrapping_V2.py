@@ -15,7 +15,8 @@ http = urllib3.PoolManager()
 req = http.request('GET','https://old.reddit.com/r/wallpapers/.rss',headers = { 'User-Agent' : 'Mozilla/5.0' })
 #setting the header to make the site think the request came from the browser
 sauce=req.data.decode('utf-8')   #decoding the response
-req.close()
+req.release_conn()
+
 p=[]
 soup=bs.BeautifulSoup(sauce,'xml')   # Parsing the xml rss feed
 l=soup.find_all('content')
